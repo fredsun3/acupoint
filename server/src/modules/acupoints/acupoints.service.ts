@@ -24,7 +24,7 @@ export class AcupointsService {
       name: '合谷穴',
       category: '手阳明大肠经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=合谷穴',
       position: '在手背，第1、2掌骨间，当第二掌骨桡侧的中点处',
       location: '简便取穴法：以一手的拇指指骨关节横纹，放在另一手拇、食指之间的指蹼缘上，当拇指尖下是穴',
       effects: [
@@ -47,7 +47,7 @@ export class AcupointsService {
       name: '足三里',
       category: '足阳明胃经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=足三里',
       position: '在小腿前外侧，当犊鼻下3寸，距胫骨前缘一横指（中指）',
       location: '外膝眼下3寸，胫骨前嵴外1横指处',
       effects: [
@@ -69,7 +69,7 @@ export class AcupointsService {
       name: '关元穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=关元穴',
       position: '在下腹部，前正中线上，当脐下3寸',
       location: '肚脐正下方4横指处',
       effects: [
@@ -91,7 +91,7 @@ export class AcupointsService {
       name: '百会穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=百会穴',
       position: '在头部，当前发际正中直上5寸，或两耳尖连线的中点处',
       location: '头顶正中线，两耳尖连线交叉点',
       effects: [
@@ -113,7 +113,7 @@ export class AcupointsService {
       name: '曲池穴',
       category: '手阳明大肠经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=曲池穴',
       position: '在肘横纹外侧端，屈肘，当尺泽与肱骨外上髁连线中点',
       location: '屈肘成直角，在肘横纹外侧端与肱骨外上髁连线中点',
       effects: [
@@ -134,7 +134,7 @@ export class AcupointsService {
       name: '内关穴',
       category: '手厥阴心包经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=内关穴',
       position: '在前臂掌侧，当曲泽与大陵的连线上，腕横纹上2寸，掌长肌腱与桡侧腕屈肌腱之间',
       location: '腕横纹向上3横指，两筋之间',
       effects: [
@@ -155,7 +155,7 @@ export class AcupointsService {
       name: '三阴交',
       category: '足太阴脾经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=三阴交',
       position: '在小腿内侧，当足内踝尖上3寸，胫骨内侧缘后方',
       location: '内踝尖向上4横指，胫骨后缘',
       effects: [
@@ -177,7 +177,7 @@ export class AcupointsService {
       name: '太冲穴',
       category: '足厥阴肝经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=太冲穴',
       position: '在足背侧，当第1、2跖骨结合部之前凹陷处',
       location: '足背第一、二跖骨结合部前方凹陷处',
       effects: [
@@ -198,7 +198,7 @@ export class AcupointsService {
       name: '涌泉穴',
       category: '足少阴肾经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=涌泉穴',
       position: '在足底部，卷足时足前部凹陷处，约当足底第2、3趾趾缝纹头端与足跟连线的前1/3与后2/3交点上',
       location: '足底前1/3处，卷足时足心凹陷处',
       effects: [
@@ -219,7 +219,7 @@ export class AcupointsService {
       name: '神门穴',
       category: '手少阴心经',
       bodyPart: '四肢',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=神门穴',
       position: '在腕部，腕掌侧横纹尺侧端，尺侧腕屈肌腱的桡侧凹陷处',
       location: '手腕横纹内侧端，尺侧腕屈肌腱桡侧凹陷处',
       effects: [
@@ -240,7 +240,7 @@ export class AcupointsService {
       name: '中脘穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=中脘穴',
       position: '在上腹部，前正中线上，当脐中上4寸',
       location: '肚脐正上方5横指处',
       effects: [
@@ -262,7 +262,7 @@ export class AcupointsService {
       name: '神阙穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=神阙穴',
       position: '在腹中部，脐中央',
       location: '肚脐正中央',
       effects: [
@@ -284,7 +284,7 @@ export class AcupointsService {
       name: '风池穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=风池穴',
       position: '在项部，当枕骨之下，与风府相平，胸锁乳突肌与斜方肌上端之间的凹陷处',
       location: '后脑勺下方，两条大筋之间的凹陷处',
       effects: [
@@ -306,7 +306,7 @@ export class AcupointsService {
       name: '膻中穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=膻中穴',
       position: '在胸部，当前正中线上，平第4肋间，两乳头连线的中点',
       location: '两乳头连线中点处',
       effects: [
@@ -327,7 +327,7 @@ export class AcupointsService {
       name: '命门穴',
       category: '督脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=命门穴',
       position: '在腰部，当后正中线上，第2腰椎棘突下凹陷中',
       location: '后腰部，正对肚脐的脊柱位置',
       effects: [
@@ -349,7 +349,7 @@ export class AcupointsService {
       name: '腰阳关',
       category: '督脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=腰阳关',
       position: '在腰部，当后正中线上，第4腰椎棘突下凹陷中',
       location: '后腰部，命门穴下方约2横指处',
       effects: [
@@ -370,7 +370,7 @@ export class AcupointsService {
       name: '太阳穴',
       category: '经外奇穴',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=太阳穴',
       position: '在颞部，当眉梢与目外眦之间，向后约一横指的凹陷处',
       location: '眉梢与外眼角之间向后约一横指的凹陷处',
       effects: [
@@ -392,7 +392,7 @@ export class AcupointsService {
       name: '迎香穴',
       category: '手阳明大肠经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=迎香穴',
       position: '在鼻翼外缘中点旁，当鼻唇沟中',
       location: '鼻翼外缘中点，鼻唇沟处',
       effects: [
@@ -414,7 +414,7 @@ export class AcupointsService {
       name: '气海穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=气海穴',
       position: '在下腹部，前正中线上，当脐下1.5寸',
       location: '肚脐正下方2横指处',
       effects: [
@@ -435,7 +435,7 @@ export class AcupointsService {
       name: '中极穴',
       category: '任脉',
       bodyPart: '躯干',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=中极穴',
       position: '在下腹部，前正中线上，当脐下4寸',
       location: '肚脐正下方5横指处',
       effects: [
@@ -457,7 +457,7 @@ export class AcupointsService {
       name: '印堂穴',
       category: '经外奇穴',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=印堂',
       position: '在额部，当两眉头之中间',
       location: '两眉连线中点处',
       effects: [
@@ -479,7 +479,7 @@ export class AcupointsService {
       name: '人中穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=人中穴',
       position: '在面部，当人中沟的上1/3与中1/3交点处',
       location: '鼻唇沟上1/3与中1/3交界处',
       effects: [
@@ -501,7 +501,7 @@ export class AcupointsService {
       name: '承浆穴',
       category: '任脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=承浆穴',
       position: '在面部，颏唇沟的正中凹陷处',
       location: '下唇与下巴之间的凹陷处',
       effects: [
@@ -522,7 +522,7 @@ export class AcupointsService {
       name: '睛明穴',
       category: '足太阳膀胱经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=睛明穴',
       position: '在面部，目内眦角稍上方凹陷处',
       location: '内眼角稍上方凹陷处',
       effects: [
@@ -544,7 +544,7 @@ export class AcupointsService {
       name: '攒竹穴',
       category: '足太阳膀胱经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=攒竹穴',
       position: '在面部，当眉头陷中，眶上切迹处',
       location: '眉毛内侧端凹陷处',
       effects: [
@@ -566,7 +566,7 @@ export class AcupointsService {
       name: '丝竹空穴',
       category: '手少阳三焦经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=丝竹空穴',
       position: '在面部，当眉梢凹陷处',
       location: '眉毛外侧端凹陷处',
       effects: [
@@ -588,7 +588,7 @@ export class AcupointsService {
       name: '瞳子髎穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=瞳子髎穴',
       position: '在面部，目外眦旁，当眶外侧缘处',
       location: '外眼角旁凹陷处',
       effects: [
@@ -610,7 +610,7 @@ export class AcupointsService {
       name: '四白穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=四白穴',
       position: '在面部，瞳孔直下，当眶下孔凹陷处',
       location: '眼球正下方1寸处凹陷',
       effects: [
@@ -632,7 +632,7 @@ export class AcupointsService {
       name: '承泣穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=承泣穴',
       position: '在面部，瞳孔直下，当眼球与眶下缘之间',
       location: '眼球正下方，眶下缘处',
       effects: [
@@ -654,7 +654,7 @@ export class AcupointsService {
       name: '地仓穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=地仓穴',
       position: '在面部，口角外侧，上直对瞳孔',
       location: '嘴角外侧，平对瞳孔处',
       effects: [
@@ -676,7 +676,7 @@ export class AcupointsService {
       name: '颊车穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=颊车穴',
       position: '在面颊部，下颌角前上方约一横指（中指），当咀嚼时咬肌隆起，按之凹陷处',
       location: '下颌角前方，咬肌隆起处',
       effects: [
@@ -698,7 +698,7 @@ export class AcupointsService {
       name: '下关穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=下关穴',
       position: '在面部耳前方，当颧弓与下颌切迹所形成的凹陷中',
       location: '耳屏前方，颧弓下缘凹陷处',
       effects: [
@@ -720,7 +720,7 @@ export class AcupointsService {
       name: '听宫穴',
       category: '手太阳小肠经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=听宫穴',
       position: '在面部，耳屏前，下颌骨髁状突的后方，张口时呈凹陷处',
       location: '耳屏前方，张口时的凹陷处',
       effects: [
@@ -742,7 +742,7 @@ export class AcupointsService {
       name: '听会穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=听会穴',
       position: '在面部，当耳屏间切迹的前方，下颌骨髁状突的后方，张口有凹陷处',
       location: '耳屏前方，听宫穴下方凹陷处',
       effects: [
@@ -764,7 +764,7 @@ export class AcupointsService {
       name: '翳风穴',
       category: '手少阳三焦经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=翳风穴',
       position: '在耳垂后方，当乳突与下颌角之间的凹陷处',
       location: '耳垂后方，乳突与下颌角之间凹陷',
       effects: [
@@ -786,7 +786,7 @@ export class AcupointsService {
       name: '角孙穴',
       category: '手少阳三焦经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=角孙穴',
       position: '在头部，折耳廓向前，当耳尖直上入发际处',
       location: '耳尖直上，发际处',
       effects: [
@@ -808,7 +808,7 @@ export class AcupointsService {
       name: '头维穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=头维穴',
       position: '在头侧部，当额角发际上0.5寸，头正中线旁4.5寸',
       location: '额角发际上0.5寸，距中线4.5寸',
       effects: [
@@ -830,7 +830,7 @@ export class AcupointsService {
       name: '上星穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=上星穴',
       position: '在头部，当前发际正中直上1寸',
       location: '前发际正中直上1寸',
       effects: [
@@ -852,7 +852,7 @@ export class AcupointsService {
       name: '神庭穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=神庭穴',
       position: '在头部，当前发际正中直上0.5寸',
       location: '前发际正中直上0.5寸',
       effects: [
@@ -874,7 +874,7 @@ export class AcupointsService {
       name: '头临泣穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=头临泣穴',
       position: '在头部，当瞳孔直上入前发际0.5寸，神庭与头维连线的中点处',
       location: '瞳孔直上，前发际0.5寸',
       effects: [
@@ -896,7 +896,7 @@ export class AcupointsService {
       name: '风府穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=风府穴',
       position: '在项部，当后发际正中直上1寸，枕外隆凸直下，两侧斜方肌之间凹陷中',
       location: '后发际正中直上1寸凹陷处',
       effects: [
@@ -918,7 +918,7 @@ export class AcupointsService {
       name: '哑门穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=哑门穴',
       position: '在项部，当后发际正中直上0.5寸，第1颈椎下',
       location: '后发际正中直上0.5寸',
       effects: [
@@ -940,7 +940,7 @@ export class AcupointsService {
       name: '天柱穴',
       category: '足太阳膀胱经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=天柱穴',
       position: '在项部，大筋（斜方肌）外缘之后发际凹陷中，约当后发际正中旁开1.3寸',
       location: '后发际正中旁开1.3寸，斜方肌外缘',
       effects: [
@@ -962,7 +962,7 @@ export class AcupointsService {
       name: '完骨穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=完骨穴',
       position: '在头部，当耳后乳突的后下方凹陷处',
       location: '耳后乳突后下方凹陷处',
       effects: [
@@ -984,7 +984,7 @@ export class AcupointsService {
       name: '率谷穴',
       category: '足少阳胆经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=率谷穴',
       position: '在头部，当耳尖直上入发际1.5寸，角孙直上方',
       location: '耳尖直上，发际1.5寸',
       effects: [
@@ -1006,7 +1006,7 @@ export class AcupointsService {
       name: '大椎穴',
       category: '督脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=大椎穴',
       position: '在后正中线上，第7颈椎棘突下凹陷中',
       location: '颈部下方，第7颈椎棘突下',
       effects: [
@@ -1028,7 +1028,7 @@ export class AcupointsService {
       name: '廉泉穴',
       category: '任脉',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=廉泉穴',
       position: '在颈部，当前正中线上，结喉上方，舌骨上缘凹陷处',
       location: '喉结上方，舌骨上缘凹陷',
       effects: [
@@ -1050,7 +1050,7 @@ export class AcupointsService {
       name: '扶突穴',
       category: '手阳明大肠经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=扶突穴',
       position: '在颈外侧部，结喉旁，当胸锁乳突肌的前后缘之间',
       location: '喉结旁开3寸，胸锁乳突肌前后缘之间',
       effects: [
@@ -1072,7 +1072,7 @@ export class AcupointsService {
       name: '天鼎穴',
       category: '手阳明大肠经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=天鼎穴',
       position: '在颈外侧部，胸锁乳突肌后缘，当结喉旁开3寸',
       location: '喉结旁开3寸，胸锁乳突肌后缘',
       effects: [
@@ -1094,7 +1094,7 @@ export class AcupointsService {
       name: '天容穴',
       category: '手太阳小肠经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=天容穴',
       position: '在颈外侧部，当下颌角的后方，胸锁乳突肌的前缘凹陷中',
       location: '下颌角后方，胸锁乳突肌前缘',
       effects: [
@@ -1116,7 +1116,7 @@ export class AcupointsService {
       name: '天牖穴',
       category: '手少阳三焦经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=天牖穴',
       position: '在颈侧部，当乳突的后方直下，平下颌角，胸锁乳突肌的后缘',
       location: '乳突后方直下，平下颌角，胸锁乳突肌后缘',
       effects: [
@@ -1138,7 +1138,7 @@ export class AcupointsService {
       name: '人迎穴',
       category: '足阳明胃经',
       bodyPart: '头面颈',
-      image: '',
+      image: 'https://via.placeholder.com/600x400/C23B34/FFFFFF?text=人迎穴',
       position: '在颈部，喉结旁开1.5寸，当颈总动脉之后，胸锁乳突肌的前缘',
       location: '喉结旁开1.5寸，颈总动脉后方',
       effects: [
