@@ -26,6 +26,7 @@ interface AcupointDetail {
 const DetailPage = () => {
   const router = useRouter()
   const [detail, setDetail] = useState<AcupointDetail | null>(null)
+  const [imageError, setImageError] = useState(false)
 
   useLoad(async () => {
     const { id } = router.params
@@ -163,13 +164,17 @@ const DetailPage = () => {
     <View className="min-h-screen bg-gray-50 pb-20">
       {/* 穴位图片区域 */}
       <View className="bg-white mb-4">
-        {detail.image ? (
+        {detail.image && !imageError ? (
           <View>
             <Image
               src={detail.image}
               mode="aspectFill"
               className="w-full h-64"
               lazyLoad
+              onError={() => {
+                console.error('图片加载失败:', detail.image)
+                setImageError(true)
+              }}
             />
             <View className="px-4 py-3">
               <Button
@@ -183,18 +188,23 @@ const DetailPage = () => {
             </View>
           </View>
         ) : (
-          <View className="w-full h-64 bg-gray-100 flex items-center justify-center">
+          <View className="w-full h-64 bg-gradient-to-br from-[#C23B34] to-[#8B0000] flex items-center justify-center">
             <View className="text-center px-4">
-              <MapPin size={48} color="#C23B34" />
-              <Text className="block text-gray-500 mt-2">暂无穴位图片</Text>
-              <View className="mt-4">
+              <MapPin size={64} color="#FFFFFF" className="mx-auto mb-3" />
+              <Text className="block text-white text-2xl font-bold mb-2">
+                {detail.name}
+              </Text>
+              <Text className="block text-white text-opacity-80 text-sm mb-4">
+                {imageError ? '图片加载失败，请上传新图片' : '暂无穴位图片'}
+              </Text>
+              <View>
                 <Button
                   onClick={handleUploadImage}
-                  className="bg-[#C23B34] text-white"
+                  className="bg-white text-[#C23B34]"
                   size="sm"
                 >
-                  <Upload size={16} color="#ffffff" className="mr-2" />
-                  上传穴位图片
+                  <Upload size={16} color="#C23B34" className="mr-2" />
+                  {imageError ? '重新上传' : '上传穴位图片'}
                 </Button>
               </View>
             </View>
