@@ -1,5 +1,5 @@
 import { View, Text } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
+import Taro, { useLoad } from '@tarojs/taro'
 import { Network } from '@/network'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -13,6 +13,18 @@ const IndexPage = () => {
     const res = await Network.request({ url: '/api/hello' })
     console.log(res.data)
   })
+
+  const handleViewAll = () => {
+    Taro.switchTab({
+      url: '/pages/acupoints/index'
+    })
+  }
+
+  const handlePointDetail = (id: number) => {
+    Taro.navigateTo({
+      url: `/pages/detail/index?id=${id}`
+    })
+  }
 
   const categories = [
     { id: 1, name: '头面颈部', icon: Activity, count: 36 },
@@ -46,14 +58,19 @@ const IndexPage = () => {
       <View className="px-4 mb-6">
         <View className="flex justify-between items-center mb-3">
           <Text className="block text-lg font-semibold text-gray-900">穴位分类</Text>
-          <Text className="block text-sm text-gray-500">查看全部</Text>
+          <Text
+            className="block text-sm text-[#C23B34]"
+            onClick={handleViewAll}
+          >
+            查看全部
+          </Text>
         </View>
 
         <View className="grid grid-cols-3 gap-3">
           {categories.map((category) => {
             const Icon = category.icon
             return (
-              <Card key={category.id} className="p-4 flex flex-col items-center">
+              <Card key={category.id} className="p-4 flex flex-col items-center" onClick={handleViewAll}>
                 <Icon size={32} color="#C23B34" />
                 <Text className="block text-sm font-medium text-gray-900 mt-2">
                   {category.name}
@@ -69,7 +86,12 @@ const IndexPage = () => {
       <View className="px-4 mb-6">
         <View className="flex justify-between items-center mb-3">
           <Text className="block text-lg font-semibold text-gray-900">热门穴位</Text>
-          <Text className="block text-sm text-gray-500">查看全部</Text>
+          <Text
+            className="block text-sm text-[#C23B34]"
+            onClick={handleViewAll}
+          >
+            查看全部
+          </Text>
         </View>
 
         <View className="space-y-3">
@@ -87,7 +109,11 @@ const IndexPage = () => {
                     <Text className="block text-sm text-gray-600">{point.effect}</Text>
                   </View>
                   <View className="ml-3">
-                    <Button size="sm" variant="outline">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handlePointDetail(point.id)}
+                    >
                       详情
                     </Button>
                   </View>
