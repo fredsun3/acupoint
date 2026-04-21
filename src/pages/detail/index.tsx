@@ -168,8 +168,9 @@ const DetailPage = () => {
           <View>
             <Image
               src={detail.image}
-              mode="widthFix"
-              className="w-full"
+              mode="aspectFit"
+              className="w-full max-h-80"
+              style={{ maxHeight: '320px' }}
               lazyLoad
               onError={() => {
                 console.error('图片加载失败:', detail.image?.substring(0, 100))
