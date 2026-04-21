@@ -1,13 +1,13 @@
 export default typeof definePageConfig === 'function'
   ? definePageConfig({
-      navigationBarTitleText: '穴位通',
+      navigationBarTitleText: '穴位详情',
       navigationBarBackgroundColor: '#ffffff',
       navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true
+      enableShareAppMessage: true
     })
   : {
-      navigationBarTitleText: '穴位通',
+      navigationBarTitleText: '穴位详情',
       navigationBarBackgroundColor: '#ffffff',
       navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true
+      enableShareAppMessage: true
     }
