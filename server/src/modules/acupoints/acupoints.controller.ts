@@ -38,8 +38,8 @@ export class AcupointsController {
    */
   @Get('search')
   @HttpCode(200)
-  async search(@Query('keyword') keyword: string) {
-    const data = await this.acupointsService.search(keyword)
+  async search(@Query('keyword') keyword?: string) {
+    const data = await this.acupointsService.search(keyword || '')
     return {
       code: 200,
       msg: 'success',

@@ -17,6 +17,7 @@ interface Acupoint {
   image: string
   position: string
   location: string
+  bodyPart: string
   effects: string[]
   acupuncture: string
   moxibustion: string
@@ -86,23 +87,14 @@ const AcupointsPage = () => {
       return
     }
 
-    // 根据头面、躯干、四肢分类
+    // 根据身体部位分类（使用 bodyPart 字段）
     let categoryPoints: Acupoint[] = []
     if (category === 'head') {
-      // 头面部：任脉、督脉的头部穴位、经外奇穴
-      categoryPoints = allPoints.filter(point =>
-        ['百会', '太阳', '迎香', '风池'].some(key => point.name.includes(key))
-      )
+      categoryPoints = allPoints.filter(point => point.bodyPart === '头面颈')
     } else if (category === 'trunk') {
-      // 躯干部：胸腹部穴位
-      categoryPoints = allPoints.filter(point =>
-        ['关元', '中脘', '神阙', '膻中', '气海', '中极', '命门'].some(key => point.name.includes(key))
-      )
+      categoryPoints = allPoints.filter(point => point.bodyPart === '躯干')
     } else if (category === 'limbs') {
-      // 四肢部：四肢穴位
-      categoryPoints = allPoints.filter(point =>
-        ['合谷', '曲池', '内关', '神门', '足三里', '三阴交', '太冲', '涌泉', '腰阳关'].some(key => point.name.includes(key))
-      )
+      categoryPoints = allPoints.filter(point => point.bodyPart === '四肢')
     }
 
     const filtered = searchKeyword
@@ -125,7 +117,24 @@ const AcupointsPage = () => {
   // 页面加载时获取数据
   useEffect(() => {
     fetchAcupoints()
+
+    // 检查 URL 参数，如果有搜索关键词则自动执行搜索
+    const pages = Taro.getCurrentPages()
+    const currentPage = pages[pages.length - 1]
+    if (currentPage) {
+      const options = currentPage.options as any
+      if (options.keyword) {
+        setSearchKeyword(decodeURIComponent(options.keyword))
+      }
+    }
   }, [])
+
+  // 当搜索关键词变化时自动搜索
+  useEffect(() => {
+    if (searchKeyword) {
+      handleSearch(searchKeyword)
+    }
+  }, [searchKeyword])
 
   return (
     <View className="min-h-screen bg-gray-50 pb-4">
@@ -146,11 +155,11 @@ const AcupointsPage = () => {
 
       {/* 分类切换 */}
       <Tabs defaultValue="all" onValueChange={filterByCategory}>
-        <TabsList className="grid grid-cols-3 w-full mx-4 mb-4">
-          <TabsTrigger value="all">全部</TabsTrigger>
-          <TabsTrigger value="head">头面颈</TabsTrigger>
-          <TabsTrigger value="trunk">躯干</TabsTrigger>
-          <TabsTrigger value="limbs">四肢</TabsTrigger>
+        <TabsList className="grid grid-cols-4 w-full mx-4 mb-4">
+          <TabsTrigger value="all">全部({allPoints.length})</TabsTrigger>
+          <TabsTrigger value="head">头面颈({allPoints.filter(p => p.bodyPart === '头面颈').length})</TabsTrigger>
+          <TabsTrigger value="trunk">躯干({allPoints.filter(p => p.bodyPart === '躯干').length})</TabsTrigger>
+          <TabsTrigger value="limbs">四肢({allPoints.filter(p => p.bodyPart === '四肢').length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab}>

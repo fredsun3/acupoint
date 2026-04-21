@@ -1,5 +1,6 @@
 import { View, Text } from '@tarojs/components'
 import Taro, { useLoad } from '@tarojs/taro'
+import { useState } from 'react'
 import { Network } from '@/network'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -9,6 +10,8 @@ import { Search, Activity, Heart } from 'lucide-react-taro'
 import './index.css'
 
 const IndexPage = () => {
+  const [searchText, setSearchText] = useState('')
+
   useLoad(async () => {
     const res = await Network.request({ url: '/api/hello' })
     console.log(res.data)
@@ -20,6 +23,14 @@ const IndexPage = () => {
     })
   }
 
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      Taro.switchTab({
+        url: `/pages/acupoints/index?keyword=${encodeURIComponent(searchText)}`
+      })
+    }
+  }
+
   const handlePointDetail = (id: number) => {
     Taro.navigateTo({
       url: `/pages/detail/index?id=${id}`
@@ -28,8 +39,8 @@ const IndexPage = () => {
 
   const categories = [
     { id: 1, name: '头面颈部', icon: Activity, count: 36 },
-    { id: 2, name: '躯干部', icon: Heart, count: 48 },
-    { id: 3, name: '四肢部', icon: Activity, count: 72 }
+    { id: 2, name: '躯干部', icon: Heart, count: 8 },
+    { id: 3, name: '四肢部', icon: Activity, count: 8 }
   ]
 
   const hotAcupoints = [
@@ -50,7 +61,13 @@ const IndexPage = () => {
           <Input
             className="border-0 flex-1"
             placeholder="搜索穴位名称或功效"
+            value={searchText}
+            onInput={(e) => setSearchText(e.detail.value)}
+            onConfirm={handleSearch}
           />
+          <Button size="sm" className="ml-2 bg-[#C23B34] hover:bg-red-700" onClick={handleSearch}>
+            搜索
+          </Button>
         </View>
       </View>
 
