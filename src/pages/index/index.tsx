@@ -58,12 +58,11 @@ const IndexPage = () => {
       <View className="px-4 mb-6">
         <View className="flex justify-between items-center mb-3">
           <Text className="block text-lg font-semibold text-gray-900">穴位分类</Text>
-          <Text
-            className="block text-sm text-[#C23B34]"
-            onClick={handleViewAll}
-          >
-            查看全部
-          </Text>
+          <View onClick={handleViewAll}>
+            <Text className="block text-sm text-[#C23B34]">
+              查看全部
+            </Text>
+          </View>
         </View>
 
         <View className="grid grid-cols-3 gap-3">
@@ -86,12 +85,11 @@ const IndexPage = () => {
       <View className="px-4 mb-6">
         <View className="flex justify-between items-center mb-3">
           <Text className="block text-lg font-semibold text-gray-900">热门穴位</Text>
-          <Text
-            className="block text-sm text-[#C23B34]"
-            onClick={handleViewAll}
-          >
-            查看全部
-          </Text>
+          <View onClick={handleViewAll}>
+            <Text className="block text-sm text-[#C23B34]">
+              查看全部
+            </Text>
+          </View>
         </View>
 
         <View className="space-y-3">
