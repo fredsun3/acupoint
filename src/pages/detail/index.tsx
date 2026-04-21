@@ -164,15 +164,15 @@ const DetailPage = () => {
     <View className="min-h-screen bg-gray-50 pb-20">
       {/* 穴位图片区域 */}
       <View className="bg-white mb-4">
-        {detail.image && !imageError && !detail.image.includes('placeholder.com') ? (
+        {detail.image && !imageError ? (
           <View>
             <Image
               src={detail.image}
-              mode="aspectFill"
-              className="w-full h-64"
+              mode="widthFix"
+              className="w-full"
               lazyLoad
               onError={() => {
-                console.error('图片加载失败:', detail.image)
+                console.error('图片加载失败:', detail.image?.substring(0, 100))
                 setImageError(true)
               }}
             />
@@ -195,7 +195,7 @@ const DetailPage = () => {
                 {detail.name}
               </Text>
               <Text className="block text-white text-opacity-80 text-sm mb-4">
-                {imageError || detail.image?.includes('placeholder.com') ? '暂无真实穴位图片' : '暂无穴位图片'}
+                {imageError ? '图片加载失败' : '暂无穴位图片'}
               </Text>
               <View>
                 <Button
