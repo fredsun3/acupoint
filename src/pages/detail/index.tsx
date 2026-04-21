@@ -1,6 +1,7 @@
 import { View, Text, Image } from '@tarojs/components'
 import { useState } from 'react'
 import Taro, { useLoad, useRouter, useShareAppMessage } from '@tarojs/taro'
+import { Network } from '@/network'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -26,35 +27,41 @@ const DetailPage = () => {
   const router = useRouter()
   const [detail, setDetail] = useState<AcupointDetail | null>(null)
 
-  useLoad(() => {
+  useLoad(async () => {
     const { id } = router.params
     console.log('穴位ID:', id)
 
-    // 模拟数据，实际应从后端获取
-    const mockData: AcupointDetail = {
-      id: id || '1',
-      name: '合谷穴',
-      category: '手阳明大肠经',
-      image: '', // TODO: 从对象存储获取图片
-      position: '在手背，第1、2掌骨间，当第二掌骨桡侧的中点处',
-      location: '简便取穴法：以一手的拇指指骨关节横纹，放在另一手拇、食指之间的指蹼缘上，当拇指尖下是穴',
-      effects: [
-        '镇痛作用：头痛、牙痛、面部疼痛',
-        '解表散寒：感冒发热、咽喉肿痛',
-        '通经活络：手腕疼痛、手臂麻木',
-        '调节胃肠：胃痛、腹胀、便秘'
-      ],
-      acupuncture: '直刺0.5-1寸，局部酸胀，可扩散至整个手掌或手臂',
-      moxibustion: '艾炷灸3-5壮，或艾条灸5-10分钟',
-      precautions: [
-        '孕妇慎用',
-        '针刺手法要轻柔，避免损伤血管',
-        '体质虚弱者慎用',
-        '不宜长期针刺同一侧合谷穴'
-      ]
+    if (!id) {
+      Taro.showToast({
+        title: '参数错误',
+        icon: 'none'
+      })
+      return
     }
 
-    setDetail(mockData)
+    try {
+      const res = await Network.request({
+        url: '/api/acupoints/detail',
+        data: { id }
+      })
+
+      console.log('穴位详情:', res.data)
+
+      if (res.data && res.data.data) {
+        setDetail(res.data.data)
+      } else {
+        Taro.showToast({
+          title: '获取穴位信息失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.error('获取穴位详情失败:', error)
+      Taro.showToast({
+        title: '网络错误，请重试',
+        icon: 'none'
+      })
+    }
   })
 
   useShareAppMessage(() => {
