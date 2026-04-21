@@ -1,4 +1,4 @@
-import { Controller, Get, Query, HttpCode, HttpStatus } from '@nestjs/common'
+import { Controller, Get, Post, Query, Body, HttpCode, HttpStatus } from '@nestjs/common'
 import { AcupointsService } from './acupoints.service'
 
 @Controller('acupoints')
@@ -44,6 +44,20 @@ export class AcupointsController {
       code: 200,
       msg: 'success',
       data
+    }
+  }
+
+  /**
+   * 更新穴位图片
+   */
+  @Post('update-image')
+  @HttpCode(200)
+  async updateImage(@Body() body: { id: string; imageUrl: string }) {
+    const result = await this.acupointsService.updateImage(body.id, body.imageUrl)
+    return {
+      code: 200,
+      msg: 'success',
+      data: result
     }
   }
 }

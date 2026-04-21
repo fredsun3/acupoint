@@ -1191,4 +1191,17 @@ export class AcupointsService {
         p.effects.some(e => e.includes(lowerKeyword))
     )
   }
+
+  /**
+   * 更新穴位图片
+   */
+  updateImage(id: string, imageUrl: string): Acupoint {
+    const index = this.acupoints.findIndex(p => p.id === id)
+    if (index === -1) {
+      throw new HttpException('穴位不存在', HttpStatus.NOT_FOUND)
+    }
+
+    this.acupoints[index].image = imageUrl
+    return this.acupoints[index]
+  }
 }

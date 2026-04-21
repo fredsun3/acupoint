@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
-import { MapPin, Zap, Flame, Info } from 'lucide-react-taro'
+import { MapPin, Zap, Flame, Info, Upload } from 'lucide-react-taro'
 
 
 interface AcupointDetail {
@@ -78,6 +78,79 @@ const DetailPage = () => {
     })
   }
 
+  const handleUploadImage = async () => {
+    try {
+      const res = await Taro.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['album', 'camera']
+      })
+
+      if (res.tempFilePaths && res.tempFilePaths.length > 0) {
+        Taro.showLoading({ title: '上传中...' })
+
+        try {
+          // 上传图片到对象存储
+          const uploadRes = await Network.uploadFile({
+            url: '/api/upload',
+            filePath: res.tempFilePaths[0],
+            name: 'file'
+          })
+
+          console.log('上传结果:', uploadRes)
+
+          // 获取图片URL
+          let imageUrl = ''
+          if (uploadRes.data) {
+            try {
+              const uploadData = JSON.parse(uploadRes.data)
+              imageUrl = uploadData.data?.url || ''
+            } catch (e) {
+              console.error('解析上传结果失败:', e)
+            }
+          }
+
+          if (!imageUrl) {
+            throw new Error('上传失败，未获取到图片URL')
+          }
+
+          // 更新穴位图片
+          const updateRes = await Network.request({
+            url: '/api/acupoints/update-image',
+            method: 'POST',
+            data: {
+              id: detail?.id,
+              imageUrl: imageUrl
+            }
+          })
+
+          console.log('更新结果:', updateRes)
+
+          if (updateRes.data && updateRes.data.data) {
+            setDetail(updateRes.data.data)
+            Taro.showToast({
+              title: '上传成功',
+              icon: 'success'
+            })
+          } else {
+            throw new Error('更新穴位图片失败')
+          }
+        } catch (error) {
+          console.error('上传失败:', error)
+          throw error
+        }
+      }
+    } catch (error) {
+      console.error('上传图片失败:', error)
+      Taro.showToast({
+        title: '上传失败，请重试',
+        icon: 'none'
+      })
+    } finally {
+      Taro.hideLoading()
+    }
+  }
+
   if (!detail) {
     return (
       <View className="flex items-center justify-center h-screen">
@@ -91,17 +164,39 @@ const DetailPage = () => {
       {/* 穴位图片区域 */}
       <View className="bg-white mb-4">
         {detail.image ? (
-          <Image
-            src={detail.image}
-            mode="aspectFill"
-            className="w-full h-64"
-            lazyLoad
-          />
+          <View>
+            <Image
+              src={detail.image}
+              mode="aspectFill"
+              className="w-full h-64"
+              lazyLoad
+            />
+            <View className="px-4 py-3">
+              <Button
+                onClick={handleUploadImage}
+                className="w-full"
+                size="sm"
+              >
+                <Upload size={16} color="#C23B34" className="mr-2" />
+                更换图片
+              </Button>
+            </View>
+          </View>
         ) : (
           <View className="w-full h-64 bg-gray-100 flex items-center justify-center">
-            <View className="text-center">
+            <View className="text-center px-4">
               <MapPin size={48} color="#C23B34" />
               <Text className="block text-gray-500 mt-2">暂无穴位图片</Text>
+              <View className="mt-4">
+                <Button
+                  onClick={handleUploadImage}
+                  className="bg-[#C23B34] text-white"
+                  size="sm"
+                >
+                  <Upload size={16} color="#ffffff" className="mr-2" />
+                  上传穴位图片
+                </Button>
+              </View>
             </View>
           </View>
         )}
