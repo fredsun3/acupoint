@@ -164,7 +164,7 @@ const DetailPage = () => {
     <View className="min-h-screen bg-gray-50 pb-20">
       {/* 穴位图片区域 */}
       <View className="bg-white mb-4">
-        {detail.image && !imageError ? (
+        {detail.image && !imageError && !detail.image.includes('placeholder.com') ? (
           <View>
             <Image
               src={detail.image}
@@ -195,7 +195,7 @@ const DetailPage = () => {
                 {detail.name}
               </Text>
               <Text className="block text-white text-opacity-80 text-sm mb-4">
-                {imageError ? '图片加载失败，请上传新图片' : '暂无穴位图片'}
+                {imageError || detail.image?.includes('placeholder.com') ? '暂无真实穴位图片' : '暂无穴位图片'}
               </Text>
               <View>
                 <Button
@@ -204,7 +204,7 @@ const DetailPage = () => {
                   size="sm"
                 >
                   <Upload size={16} color="#C23B34" className="mr-2" />
-                  {imageError ? '重新上传' : '上传穴位图片'}
+                  上传穴位图片
                 </Button>
               </View>
             </View>
