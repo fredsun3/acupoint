@@ -27,6 +27,8 @@ const DetailPage = () => {
   const router = useRouter()
   const [detail, setDetail] = useState<AcupointDetail | null>(null)
   const [imageError, setImageError] = useState(false)
+  const [imageScale, setImageScale] = useState(1)
+  const [isZoomed, setIsZoomed] = useState(false)
 
   useLoad(async () => {
     const { id } = router.params
@@ -154,6 +156,34 @@ const DetailPage = () => {
     }
   }
 
+  // 缩放控制函数
+  const handleZoomIn = () => {
+    setImageScale(prev => Math.min(prev + 0.25, 3))
+    setIsZoomed(true)
+  }
+
+  const handleZoomOut = () => {
+    const newScale = Math.max(imageScale - 0.25, 0.5)
+    setImageScale(newScale)
+    if (newScale === 1) {
+      setIsZoomed(false)
+    }
+  }
+
+  const handleResetZoom = () => {
+    setImageScale(1)
+    setIsZoomed(false)
+  }
+
+  const toggleZoom = () => {
+    if (isZoomed) {
+      handleResetZoom()
+    } else {
+      setImageScale(2)
+      setIsZoomed(true)
+    }
+  }
+
   if (!detail) {
     return (
       <View className="flex items-center justify-center h-screen">
@@ -165,20 +195,56 @@ const DetailPage = () => {
   return (
     <View className="min-h-screen bg-gray-50 pb-20">
       {/* 穴位图片区域 */}
-      <View className="bg-white mb-4">
+      <View className="bg-white mb-4 overflow-hidden">
         {detail.image && !imageError ? (
-          <View className="w-full" style={{ minHeight: '320px', backgroundColor: '#f5f5f5' }}>
+          <View className="relative" style={{ minHeight: '320px', backgroundColor: '#f5f5f5' }}>
             <Image
               src={detail.image}
-              mode="aspectFit"
-              className="w-full"
-              style={{ minHeight: '320px' }}
+              mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
+              className="w-full transition-transform duration-300"
+              style={{
+                minHeight: '320px',
+                transform: `scale(${imageScale})`,
+                transformOrigin: 'center center'
+              }}
+              onClick={toggleZoom}
               lazyLoad
               onError={() => {
                 console.error('图片加载失败:', detail.image || '无图片URL')
                 setImageError(true)
               }}
             />
+
+            {/* 缩放控制按钮 */}
+            <View className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center gap-2 bg-black bg-opacity-50 rounded-full px-4 py-2">
+              <Button
+                size="icon"
+                onClick={handleZoomOut}
+                className="bg-white text-black w-8 h-8"
+                disabled={imageScale <= 0.5}
+              >
+                <Text>-</Text>
+              </Button>
+              <Text className="text-white text-sm font-medium px-2">{Math.round(imageScale * 100)}%</Text>
+              <Button
+                size="icon"
+                onClick={handleZoomIn}
+                className="bg-white text-black w-8 h-8"
+                disabled={imageScale >= 3}
+              >
+                <Text>+</Text>
+              </Button>
+              {isZoomed && (
+                <Button
+                  size="sm"
+                  onClick={handleResetZoom}
+                  className="bg-white text-black"
+                >
+                  <Text>重置</Text>
+                </Button>
+              )}
+            </View>
+
             <View className="px-4 py-3">
               <Button
                 onClick={handleUploadImage}
