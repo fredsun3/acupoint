@@ -175,7 +175,7 @@ const DetailPage = () => {
               style={{ maxHeight: '320px' }}
               lazyLoad
               onError={() => {
-                console.error('图片加载失败:', detail.image?.substring(0, 100))
+                console.error('图片加载失败:', detail.image || '无图片URL')
                 setImageError(true)
               }}
             />

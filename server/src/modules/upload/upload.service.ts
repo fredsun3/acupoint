@@ -1,8 +1,22 @@
 import { Injectable, BadRequestException } from '@nestjs/common'
 import * as fs from 'fs'
+import { S3Storage } from 'coze-coding-dev-sdk'
 
 @Injectable()
 export class UploadService {
+  private storage: S3Storage
+
+  constructor() {
+    // 初始化对象存储
+    this.storage = new S3Storage({
+      endpointUrl: process.env.COZE_BUCKET_ENDPOINT_URL,
+      accessKey: '',
+      secretKey: '',
+      bucketName: process.env.COZE_BUCKET_NAME,
+      region: 'cn-beijing',
+    })
+  }
+
   /**
    * 上传文件到对象存储
    * 同时支持 file.path（小程序）和 file.buffer（H5）
@@ -28,25 +42,39 @@ export class UploadService {
       throw new BadRequestException('无法获取文件内容')
     }
 
-    // TODO: 上传到 TOS 对象存储
-    // 当前先返回模拟数据
-    const fileKey = `acupoints/${Date.now()}_${file.originalname}`
-
     console.log('上传文件信息:')
     console.log('- 文件名:', file.originalname)
     console.log('- 文件类型:', file.mimetype)
     console.log('- 文件大小:', file.size)
-    console.log('- 文件Key:', fileKey)
 
-    // 模拟上传到对象存储，实际应调用 storage.upload()
-    const imageUrl = `https://mock-tos-url.com/${fileKey}`
+    try {
+      // 上传到对象存储
+      const fileKey = await this.storage.uploadFile({
+        fileContent,
+        fileName: `acupoints/${Date.now()}_${file.originalname}`,
+        contentType: file.mimetype,
+      })
 
-    return {
-      fileKey,
-      filename: file.originalname,
-      mimetype: file.mimetype,
-      size: file.size,
-      imageUrl
+      console.log('文件上传成功，Key:', fileKey)
+
+      // 生成预签名 URL
+      const imageUrl = await this.storage.generatePresignedUrl({
+        key: fileKey,
+        expireTime: 2592000, // 30 天
+      })
+
+      console.log('预签名 URL 已生成')
+
+      return {
+        fileKey,
+        filename: file.originalname,
+        mimetype: file.mimetype,
+        size: file.size,
+        imageUrl
+      }
+    } catch (error) {
+      console.error('上传到对象存储失败:', error)
+      throw new BadRequestException('文件上传失败')
     }
   }
 }
