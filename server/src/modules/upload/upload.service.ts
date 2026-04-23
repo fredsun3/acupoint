@@ -1,5 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common'
 import * as fs from 'fs'
+import * as path from 'path'
 import { S3Storage } from 'coze-coding-dev-sdk'
 
 @Injectable()
@@ -47,12 +48,32 @@ export class UploadService {
     console.log('- 文件类型:', file.mimetype)
     console.log('- 文件大小:', file.size)
 
+    // 检测正确的 MIME 类型
+    let contentType = file.mimetype
+    const ext = path.extname(file.originalname).toLowerCase()
+
+    // 常见图片 MIME 类型映射
+    const mimeMap: Record<string, string> = {
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.png': 'image/png',
+      '.gif': 'image/gif',
+      '.webp': 'image/webp',
+      '.svg': 'image/svg+xml'
+    }
+
+    // 如果文件名有扩展名且 MIME 类型不准确，使用扩展名对应的类型
+    if (ext && mimeMap[ext]) {
+      contentType = mimeMap[ext]
+      console.log('检测到正确的 MIME 类型:', contentType)
+    }
+
     try {
       // 上传到对象存储
       const fileKey = await this.storage.uploadFile({
         fileContent,
         fileName: `acupoints/${Date.now()}_${file.originalname}`,
-        contentType: file.mimetype,
+        contentType: contentType,
       })
 
       console.log('文件上传成功，Key:', fileKey)
@@ -68,7 +89,7 @@ export class UploadService {
       return {
         fileKey,
         filename: file.originalname,
-        mimetype: file.mimetype,
+        mimetype: contentType,
         size: file.size,
         imageUrl
       }
