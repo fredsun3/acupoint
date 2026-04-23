@@ -24,7 +24,7 @@ export class AcupointsService {
       name: '合谷穴',
       category: '手阳明大肠经',
       bodyPart: '四肢',
-      image: 'https://pics4.baidu.com/feed/b58f8c5494eef01f79e334c35e9de22abd317db7.jpeg@f_auto?token=cf4d6b6d913311daf0978fd486708ea3',
+      image: 'https://mock-tos-url.com/acupoints/1776909557836_hegu_photo.jpg',
       position: '在手背，第1、2掌骨间，当第二掌骨桡侧的中点处',
       location: '简便取穴法：以一手的拇指指骨关节横纹，放在另一手拇、食指之间的指蹼缘上，当拇指尖下是穴',
       effects: [

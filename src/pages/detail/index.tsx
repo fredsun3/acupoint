@@ -105,13 +105,15 @@ const DetailPage = () => {
           if (uploadRes.data) {
             try {
               const uploadData = JSON.parse(uploadRes.data)
-              imageUrl = uploadData.data?.url || ''
+              imageUrl = uploadData.data?.imageUrl || uploadData.data?.url || ''
+              console.log('解析到的图片URL:', imageUrl)
             } catch (e) {
               console.error('解析上传结果失败:', e)
             }
           }
 
           if (!imageUrl) {
+            console.error('未获取到图片URL，原始响应:', uploadRes)
             throw new Error('上传失败，未获取到图片URL')
           }
 
