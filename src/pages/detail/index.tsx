@@ -167,11 +167,12 @@ const DetailPage = () => {
       {/* 穴位图片区域 */}
       <View className="bg-white mb-4">
         {detail.image && !imageError ? (
-          <View>
+          <View className="w-full" style={{ minHeight: '320px', backgroundColor: '#f5f5f5' }}>
             <Image
               src={detail.image}
-              mode="widthFix"
+              mode="aspectFit"
               className="w-full"
+              style={{ minHeight: '320px' }}
               lazyLoad
               onError={() => {
                 console.error('图片加载失败:', detail.image || '无图片URL')
