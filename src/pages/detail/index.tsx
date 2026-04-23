@@ -170,9 +170,8 @@ const DetailPage = () => {
           <View>
             <Image
               src={detail.image}
-              mode="aspectFit"
-              className="w-full max-h-80"
-              style={{ maxHeight: '320px' }}
+              mode="widthFix"
+              className="w-full"
               lazyLoad
               onError={() => {
                 console.error('图片加载失败:', detail.image || '无图片URL')
