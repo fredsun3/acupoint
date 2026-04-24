@@ -1,4 +1,4 @@
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { useState } from 'react'
 import Taro, { useLoad, useRouter, useShareAppMessage } from '@tarojs/taro'
 import { Network } from '@/network'
@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Zap, Flame, Info, Upload } from 'lucide-react-taro'
+import { NativeImg } from '@/components/NativeImg'
+import { TaroImg } from '@/components/TaroImg'
 
 // 检测是否为 SVG 格式
 const isSvgImage = (url: string) => {
@@ -231,33 +233,31 @@ const DetailPage = () => {
               </View>
             )}
 
-            {/* 图片组件 - 根据 useNativeImg 状态选择 */}
+            {/* 图片组件 - 根据状态选择组件 */}
             {useNativeImg ? (
-              <View className="relative w-full" style={{ minHeight: '320px' }}>
-                <img
-                  src={detail.image}
-                  alt={detail.name}
-                  className="w-full transition-transform duration-300"
-                  style={{
-                    minHeight: '320px',
-                    transform: `scale(${imageScale})`,
-                    transformOrigin: 'center center',
-                    display: 'block'
-                  }}
-                  onClick={toggleZoom}
-                  onLoad={() => {
-                    setIsLoading(false)
-                    console.log('图片加载成功 (SVG)')
-                  }}
-                  onError={() => {
-                    console.error('图片加载失败 (SVG)')
-                    setIsLoading(false)
-                    setImageError(true)
-                  }}
-                />
-              </View>
+              <NativeImg
+                src={detail.image}
+                alt={detail.name}
+                className="w-full transition-transform duration-300"
+                style={{
+                  minHeight: '320px',
+                  transform: `scale(${imageScale})`,
+                  transformOrigin: 'center center',
+                  display: 'block'
+                }}
+                onClick={toggleZoom}
+                onLoad={() => {
+                  setIsLoading(false)
+                  console.log('图片加载成功 (SVG)')
+                }}
+                onError={() => {
+                  console.error('图片加载失败 (SVG)')
+                  setIsLoading(false)
+                  setImageError(true)
+                }}
+              />
             ) : (
-              <Image
+              <TaroImg
                 src={getSafeImageSrc(detail.image)}
                 mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
                 className="w-full transition-transform duration-300"
