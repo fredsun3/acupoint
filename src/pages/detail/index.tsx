@@ -9,6 +9,15 @@ import { Alert } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Zap, Flame, Info, Upload } from 'lucide-react-taro'
 
+// 检测是否为 SVG 格式
+const isSvgImage = (url: string) => {
+  if (!url) return false
+  return url.startsWith('data:image/svg+xml') || url.endsWith('.svg')
+}
+
+// 检测当前环境是否为 H5
+const checkIsH5 = () => (Taro.getEnv() as string) === 'h5'
+
 
 interface AcupointDetail {
   id: string
@@ -214,39 +223,54 @@ const DetailPage = () => {
         {detail.image && !imageError ? (
           <View className="relative" style={{ minHeight: '320px', backgroundColor: '#f5f5f5' }}>
             {isLoading && (
-              <View className="absolute inset-0 flex items-center justify-center">
+              <View className="absolute inset-0 flex items-center justify-center z-10">
                 <Text className="block text-gray-400">加载中...</Text>
               </View>
             )}
-            <Image
-              src={getSafeImageSrc(detail.image)}
-              mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
-              className="w-full transition-transform duration-300"
-              style={{
-                minHeight: '320px',
-                transform: `scale(${imageScale})`,
-                transformOrigin: 'center center'
-              }}
-              onClick={toggleZoom}
-              lazyLoad
-              onLoad={() => {
-                try {
+
+            {/* H5 环境下对 SVG 使用 HTML img 标签 */}
+            {checkIsH5() && isSvgImage(detail.image) ? (
+              <View className="relative w-full" style={{ minHeight: '320px' }}>
+                <img
+                  src={detail.image}
+                  alt={detail.name}
+                  className="w-full transition-transform duration-300"
+                  style={{
+                    minHeight: '320px',
+                    transform: `scale(${imageScale})`,
+                    transformOrigin: 'center center',
+                    display: 'block'
+                  }}
+                  onClick={toggleZoom}
+                  onLoad={() => {
+                    setIsLoading(false)
+                    console.log('图片加载成功 (SVG)')
+                  }}
+                  onError={() => {
+                    console.error('图片加载失败 (SVG)')
+                    setIsLoading(false)
+                    setImageError(true)
+                  }}
+                />
+              </View>
+            ) : (
+              <Image
+                src={getSafeImageSrc(detail.image)}
+                mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
+                className="w-full transition-transform duration-300"
+                style={{
+                  minHeight: '320px',
+                  transform: `scale(${imageScale})`,
+                  transformOrigin: 'center center'
+                }}
+                onClick={toggleZoom}
+                lazyLoad
+                onLoad={() => {
                   setIsLoading(false)
                   console.log('图片加载成功')
-                } catch (err) {
-                  console.error('onLoad 处理错误:', err)
-                }
-              }}
-              onError={() => {
-                try {
-                  console.error('图片加载失败:', detail.image?.substring(0, 100) || '无图片URL')
-                  setIsLoading(false)
-                  setImageError(true)
-                } catch (err) {
-                  console.error('onError 处理错误:', err)
-                }
-              }}
-            />
+                }}
+              />
+            )}
 
             {/* 缩放控制按钮 */}
             <View className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center gap-2 bg-black bg-opacity-50 rounded-full px-4 py-2">
