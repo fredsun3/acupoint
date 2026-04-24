@@ -228,49 +228,58 @@ const DetailPage = () => {
               </View>
             )}
 
-            {/* H5 环境下对 SVG 使用 HTML img 标签 */}
-            {checkIsH5() && isSvgImage(detail.image) ? (
-              <View className="relative w-full" style={{ minHeight: '320px' }}>
-                <img
-                  src={detail.image}
-                  alt={detail.name}
-                  className="w-full transition-transform duration-300"
-                  style={{
-                    minHeight: '320px',
-                    transform: `scale(${imageScale})`,
-                    transformOrigin: 'center center',
-                    display: 'block'
-                  }}
-                  onClick={toggleZoom}
-                  onLoad={() => {
-                    setIsLoading(false)
-                    console.log('图片加载成功 (SVG)')
-                  }}
-                  onError={() => {
-                    console.error('图片加载失败 (SVG)')
-                    setIsLoading(false)
-                    setImageError(true)
-                  }}
-                />
-              </View>
-            ) : (
-              <Image
-                src={getSafeImageSrc(detail.image)}
-                mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
-                className="w-full transition-transform duration-300"
-                style={{
-                  minHeight: '320px',
-                  transform: `scale(${imageScale})`,
-                  transformOrigin: 'center center'
-                }}
-                onClick={toggleZoom}
-                lazyLoad
-                onLoad={() => {
-                  setIsLoading(false)
-                  console.log('图片加载成功')
-                }}
-              />
-            )}
+            {/* 图片组件 - 根据环境选择 */}
+            {(() => {
+              const isH5Svg = checkIsH5() && isSvgImage(detail.image)
+              if (isH5Svg) {
+                // H5 环境下对 SVG 使用 HTML img 标签
+                return (
+                  <View className="relative w-full" style={{ minHeight: '320px' }}>
+                    <img
+                      src={detail.image}
+                      alt={detail.name}
+                      className="w-full transition-transform duration-300"
+                      style={{
+                        minHeight: '320px',
+                        transform: `scale(${imageScale})`,
+                        transformOrigin: 'center center',
+                        display: 'block'
+                      }}
+                      onClick={toggleZoom}
+                      onLoad={() => {
+                        setIsLoading(false)
+                        console.log('图片加载成功 (SVG)')
+                      }}
+                      onError={() => {
+                        console.error('图片加载失败 (SVG)')
+                        setIsLoading(false)
+                        setImageError(true)
+                      }}
+                    />
+                  </View>
+                )
+              } else {
+                // 小程序或非 SVG 图片使用 Taro Image 组件
+                return (
+                  <Image
+                    src={getSafeImageSrc(detail.image)}
+                    mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
+                    className="w-full transition-transform duration-300"
+                    style={{
+                      minHeight: '320px',
+                      transform: `scale(${imageScale})`,
+                      transformOrigin: 'center center'
+                    }}
+                    onClick={toggleZoom}
+                    lazyLoad
+                    onLoad={() => {
+                      setIsLoading(false)
+                      console.log('图片加载成功')
+                    }}
+                  />
+                )
+              }
+            })()}
 
             {/* 缩放控制按钮 */}
             <View className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center gap-2 bg-black bg-opacity-50 rounded-full px-4 py-2">
