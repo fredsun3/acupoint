@@ -29,6 +29,18 @@ const DetailPage = () => {
   const [imageError, setImageError] = useState(false)
   const [imageScale, setImageScale] = useState(1)
   const [isZoomed, setIsZoomed] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // 获取安全的图片源
+  const getSafeImageSrc = (url: string) => {
+    if (!url) return ''
+    // 对于非常大的 SVG Data URI，可能需要特殊处理
+    if (url.startsWith('data:image/svg+xml') && url.length > 50000) {
+      // 对于非常大的 SVG，直接使用，让浏览器处理
+      return url
+    }
+    return url
+  }
 
   useLoad(async () => {
     const { id } = router.params
@@ -52,6 +64,9 @@ const DetailPage = () => {
 
       if (res.data && res.data.data) {
         setDetail(res.data.data)
+        // 重置图片加载状态
+        setIsLoading(true)
+        setImageError(false)
       } else {
         Taro.showToast({
           title: '获取穴位信息失败',
@@ -198,8 +213,13 @@ const DetailPage = () => {
       <View className="bg-white mb-4 overflow-hidden">
         {detail.image && !imageError ? (
           <View className="relative" style={{ minHeight: '320px', backgroundColor: '#f5f5f5' }}>
+            {isLoading && (
+              <View className="absolute inset-0 flex items-center justify-center">
+                <Text className="block text-gray-400">加载中...</Text>
+              </View>
+            )}
             <Image
-              src={detail.image}
+              src={getSafeImageSrc(detail.image)}
               mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
               className="w-full transition-transform duration-300"
               style={{
@@ -209,9 +229,22 @@ const DetailPage = () => {
               }}
               onClick={toggleZoom}
               lazyLoad
+              onLoad={() => {
+                try {
+                  setIsLoading(false)
+                  console.log('图片加载成功')
+                } catch (err) {
+                  console.error('onLoad 处理错误:', err)
+                }
+              }}
               onError={() => {
-                console.error('图片加载失败:', detail.image || '无图片URL')
-                setImageError(true)
+                try {
+                  console.error('图片加载失败:', detail.image?.substring(0, 100) || '无图片URL')
+                  setIsLoading(false)
+                  setImageError(true)
+                } catch (err) {
+                  console.error('onError 处理错误:', err)
+                }
               }}
             />
 
