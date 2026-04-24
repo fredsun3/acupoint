@@ -18,7 +18,6 @@ const isSvgImage = (url: string) => {
 // 检测当前环境是否为 H5
 const checkIsH5 = () => (Taro.getEnv() as string) === 'h5'
 
-
 interface AcupointDetail {
   id: string
   name: string
@@ -39,6 +38,7 @@ const DetailPage = () => {
   const [imageScale, setImageScale] = useState(1)
   const [isZoomed, setIsZoomed] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [useNativeImg, setUseNativeImg] = useState(false)
 
   // 获取安全的图片源
   const getSafeImageSrc = (url: string) => {
@@ -72,7 +72,10 @@ const DetailPage = () => {
       console.log('穴位详情:', res.data)
 
       if (res.data && res.data.data) {
-        setDetail(res.data.data)
+        const acupointData = res.data.data
+        setDetail(acupointData)
+        // 判断是否应该使用原生 img 标签
+        setUseNativeImg(checkIsH5() && isSvgImage(acupointData.image || ''))
         // 重置图片加载状态
         setIsLoading(true)
         setImageError(false)
@@ -228,58 +231,49 @@ const DetailPage = () => {
               </View>
             )}
 
-            {/* 图片组件 - 根据环境选择 */}
-            {(() => {
-              const isH5Svg = checkIsH5() && isSvgImage(detail.image)
-              if (isH5Svg) {
-                // H5 环境下对 SVG 使用 HTML img 标签
-                return (
-                  <View className="relative w-full" style={{ minHeight: '320px' }}>
-                    <img
-                      src={detail.image}
-                      alt={detail.name}
-                      className="w-full transition-transform duration-300"
-                      style={{
-                        minHeight: '320px',
-                        transform: `scale(${imageScale})`,
-                        transformOrigin: 'center center',
-                        display: 'block'
-                      }}
-                      onClick={toggleZoom}
-                      onLoad={() => {
-                        setIsLoading(false)
-                        console.log('图片加载成功 (SVG)')
-                      }}
-                      onError={() => {
-                        console.error('图片加载失败 (SVG)')
-                        setIsLoading(false)
-                        setImageError(true)
-                      }}
-                    />
-                  </View>
-                )
-              } else {
-                // 小程序或非 SVG 图片使用 Taro Image 组件
-                return (
-                  <Image
-                    src={getSafeImageSrc(detail.image)}
-                    mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
-                    className="w-full transition-transform duration-300"
-                    style={{
-                      minHeight: '320px',
-                      transform: `scale(${imageScale})`,
-                      transformOrigin: 'center center'
-                    }}
-                    onClick={toggleZoom}
-                    lazyLoad
-                    onLoad={() => {
-                      setIsLoading(false)
-                      console.log('图片加载成功')
-                    }}
-                  />
-                )
-              }
-            })()}
+            {/* 图片组件 - 根据 useNativeImg 状态选择 */}
+            {useNativeImg ? (
+              <View className="relative w-full" style={{ minHeight: '320px' }}>
+                <img
+                  src={detail.image}
+                  alt={detail.name}
+                  className="w-full transition-transform duration-300"
+                  style={{
+                    minHeight: '320px',
+                    transform: `scale(${imageScale})`,
+                    transformOrigin: 'center center',
+                    display: 'block'
+                  }}
+                  onClick={toggleZoom}
+                  onLoad={() => {
+                    setIsLoading(false)
+                    console.log('图片加载成功 (SVG)')
+                  }}
+                  onError={() => {
+                    console.error('图片加载失败 (SVG)')
+                    setIsLoading(false)
+                    setImageError(true)
+                  }}
+                />
+              </View>
+            ) : (
+              <Image
+                src={getSafeImageSrc(detail.image)}
+                mode={isZoomed ? 'scaleToFill' : 'aspectFit'}
+                className="w-full transition-transform duration-300"
+                style={{
+                  minHeight: '320px',
+                  transform: `scale(${imageScale})`,
+                  transformOrigin: 'center center'
+                }}
+                onClick={toggleZoom}
+                lazyLoad
+                onLoad={() => {
+                  setIsLoading(false)
+                  console.log('图片加载成功')
+                }}
+              />
+            )}
 
             {/* 缩放控制按钮 */}
             <View className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex items-center gap-2 bg-black bg-opacity-50 rounded-full px-4 py-2">
